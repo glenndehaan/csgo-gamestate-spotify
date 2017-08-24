@@ -1,0 +1,15 @@
+{
+  "name": "csgo-gamestate-spotify",
+  "version": "0.0.0",
+  "description": "NPM packages for csgo-gamestate-spotify",
+  "private": false,
+  "scripts": {
+    "server": "node server.js"
+  },
+  "author": "Glenn de Haan",
+  "license": "MIT",
+  "dependencies": {
+    "simple-node-logger": "^0.93.28",
+    "spotify-web-helper": "^1.12.0"
+  }
+}
