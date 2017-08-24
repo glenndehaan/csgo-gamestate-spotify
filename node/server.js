@@ -19,6 +19,7 @@ log.setLevel(config.application.logLevel);
  * @type {boolean}
  */
 let spotifyReady = false;
+let isPlaying = false;
 
 /**
  * Create new HTTP server
@@ -50,19 +51,23 @@ function generalProcessData(data) {
 
     if ((data.player && data.player.activity === 'menu') || (data.player.state.health === 0 || data.player.steamid !== data.provider.steamid)) {
         // Let's play some music
-        log.info(`[CS::GO] Let's start some music`);
-
         if (spotifyReady) {
-            spotifyHelper.player.play();
+            if (!isPlaying) {
+                log.info(`[CS::GO] Let's start some music`);
+                spotifyHelper.player.play();
+                isPlaying = true;
+            }
         } else {
             log.warn(`[SPOTIFY] Isn't ready to handle requests`);
         }
     } else {
         // Let's be serious so quit the music
-        log.info(`[CS::GO] Stop the music`);
-
         if (spotifyReady) {
-            spotifyHelper.player.pause();
+            if (isPlaying) {
+                log.info(`[CS::GO] Stop the music`);
+                spotifyHelper.player.pause();
+                isPlaying = false;
+            }
         } else {
             log.warn(`[SPOTIFY] Isn't ready to handle requests`);
         }
@@ -90,6 +95,7 @@ spotifyHelper.player.on('ready', () => {
     // Start playing if we aren't playing yet
     if (!spotifyHelper.status.playing) {
         spotifyHelper.player.play();
+        isPlaying = true;
     }
 });
 
