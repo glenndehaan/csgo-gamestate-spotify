@@ -22,6 +22,7 @@ Then open up CS::GO and start playing after you died we will play your music fro
 All logs will be written to the `csgo-gamestate-spotify.log` file in the node folder.
 
 ## TODO
+- C# return old sound level from user so that if user changes max volume we can also maintain that new volume level
 - Operation mode 2 implement fadein / fadeout
 - Create installer for windows to create start shortcuts
 - Better manual?
