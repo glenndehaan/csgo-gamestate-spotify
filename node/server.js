@@ -125,18 +125,27 @@ spotifyHelper.player.on('ready', () => {
             isPlaying = true;
         }
     } else if (config.application.operationMode === 2) {
-        exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId}`, (error, stdout, stderr) => {
-            if(!error && !stderr) {
-                spotifyAppId = stdout.match(new RegExp("appid:" + "(.*)" + ";"))[1];
-                spotifyDefaultVolume = stdout.match(new RegExp("volume:" + "(.*)" + ";"))[1];
+        if (!spotifyHelper.status.playing) {
+            exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId}`, (error, stdout, stderr) => {
+                if (!error && !stderr) {
+                    spotifyAppId = stdout.match(new RegExp("appid:" + "(.*)" + ";"))[1];
+                    spotifyDefaultVolume = stdout.match(new RegExp("volume:" + "(.*)" + ";"))[1];
 
-                log.trace(`[SPOTIFY] spotifyAppId: ${spotifyAppId}`);
-                log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
+                    log.trace(`[SPOTIFY] spotifyAppId: ${spotifyAppId}`);
+                    log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
 
-                spotifyHelper.player.play();
-                isPlaying = true;
-            }
-        });
+                    spotifyHelper.player.play();
+                    isPlaying = true;
+                }
+            });
+        }else{
+            log.fatal("[SPOTIFY] Was already playing please pause the music and try again!");
+
+            // We need some time to write out the log
+            setTimeout(() => {
+                process.exit(2);
+            }, 250);
+        }
     }
 });
 
