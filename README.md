@@ -11,7 +11,7 @@ After you died in CS we start playing music from spotify until you need to play.
 
 ## Usage
 - Install NodeJS 8.0 or higher
-- Copy the `gamestate_integration_glennserver.cfg` file to your `Steam\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg` folder
+- Copy the `gamestate_integration_glennserver_spotify.cfg` file to your `Steam\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg` folder
 - Open up Spotify
 - Run `npm install` in the node folder
 - Run `npm run server` in the node folder

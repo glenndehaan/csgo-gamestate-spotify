@@ -52,7 +52,7 @@ const server = http.createServer((req, res) => {
 function generalProcessData(data) {
     if (!data.previously && !data.player) return;
 
-    if ((data.player && data.player.activity === 'menu') || (data.player.state.health === 0 || data.player.steamid !== data.provider.steamid)) {
+    if ((data.player && data.player.activity === 'menu') || (data.player.state.health === 0 || data.player.steamid !== data.provider.steamid) || (data.round && data.round.phase !== "live")) {
         // Let's play some music
         if (spotifyReady) {
             if (!isPlaying) {
