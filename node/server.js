@@ -21,6 +21,7 @@ log.setLevel(config.application.logLevel);
  */
 let spotifyReady = false;
 let isPlaying = false;
+let isLowVolume = false;
 let spotifyAppId = 0;
 let spotifyDefaultVolume = 0;
 
@@ -55,15 +56,18 @@ function generalProcessData(data) {
     if ((data.player && data.player.activity === 'menu') || (data.player.state.health === 0 || data.player.steamid !== data.provider.steamid) || (data.round && data.round.phase !== "live")) {
         // Let's play some music
         if (spotifyReady) {
-            if (!isPlaying) {
-                if (config.application.operationMode === 1) {
+            if (config.application.operationMode === 1) {
+                if (!isPlaying) {
                     log.info(`[CS::GO] Let's start some music`);
                     spotifyHelper.player.play();
                     isPlaying = true;
-                } else if (config.application.operationMode === 2) {
+                }
+            } else if (config.application.operationMode === 2) {
+                if(isLowVolume) {
                     exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${spotifyDefaultVolume}`, (error, stdout, stderr) => {
-                        if(!error && !stderr) {
+                        if (!error && !stderr) {
                             log.info(`[CS::GO] Let's turn up the volume to ${spotifyDefaultVolume}%`);
+                            isLowVolume = false;
                         }
                     });
                 }
@@ -74,15 +78,18 @@ function generalProcessData(data) {
     } else {
         // Let's be serious so quit the music
         if (spotifyReady) {
-            if (isPlaying) {
-                if (config.application.operationMode === 1) {
+            if (config.application.operationMode === 1) {
+                if (isPlaying) {
                     log.info(`[CS::GO] Stop the music`);
                     spotifyHelper.player.pause();
                     isPlaying = false;
-                } else if (config.application.operationMode === 2) {
+                }
+            } else if (config.application.operationMode === 2) {
+                if(!isLowVolume) {
                     exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${config.application.spotifyLowVolume}`, (error, stdout, stderr) => {
-                        if(!error && !stderr) {
+                        if (!error && !stderr) {
                             log.info(`[CS::GO] Lower the volume to ${config.application.spotifyLowVolume}%`);
+                            isLowVolume = true;
                         }
                     });
                 }
