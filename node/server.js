@@ -61,7 +61,7 @@ function generalProcessData(data) {
                     spotifyHelper.player.play();
                     isPlaying = true;
                 } else if (config.application.operationMode === 2) {
-                    exec(`${__dirname}/../exec/SpotifySound.exe ${spotifyAppId} ${spotifyDefaultVolume}`, (error, stdout, stderr) => {
+                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${spotifyDefaultVolume}`, (error, stdout, stderr) => {
                         if(!error && !stderr) {
                             log.info(`[CS::GO] Let's turn up the volume to ${spotifyDefaultVolume}%`);
                         }
@@ -80,7 +80,7 @@ function generalProcessData(data) {
                     spotifyHelper.player.pause();
                     isPlaying = false;
                 } else if (config.application.operationMode === 2) {
-                    exec(`${__dirname}/../exec/SpotifySound.exe ${spotifyAppId} ${config.application.spotifyLowVolume}`, (error, stdout, stderr) => {
+                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${config.application.spotifyLowVolume}`, (error, stdout, stderr) => {
                         if(!error && !stderr) {
                             log.info(`[CS::GO] Lower the volume to ${config.application.spotifyLowVolume}%`);
                         }
@@ -118,7 +118,7 @@ spotifyHelper.player.on('ready', () => {
             isPlaying = true;
         }
     } else if (config.application.operationMode === 2) {
-        exec(`${__dirname}/../exec/SpotifySound.exe ${spotifyAppId}`, (error, stdout, stderr) => {
+        exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId}`, (error, stdout, stderr) => {
             if(!error && !stderr) {
                 spotifyAppId = stdout.match(new RegExp("appid:" + "(.*)" + ";"))[1];
                 spotifyDefaultVolume = stdout.match(new RegExp("volume:" + "(.*)" + ";"))[1];
