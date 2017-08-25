@@ -22,9 +22,9 @@ Then open up CS::GO and start playing after you died we will play your music fro
 All logs will be written to the `csgo-gamestate-spotify.log` file in the node folder.
 
 ## TODO
-- Create second mode (1. Mute when dead. 2. Lower volume to 10%)
-- Implement lower volume after dead lower volume then pause
-- Music can play in buytime
+- Operation mode 2 implement fadein / fadeout
+- Create installer for windows to create start shortcuts
+- Better manual?
 
 ## License
 
