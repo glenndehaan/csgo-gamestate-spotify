@@ -64,7 +64,7 @@ function generalProcessData(data) {
                 }
             } else if (config.application.operationMode === 2) {
                 if(isLowVolume) {
-                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${spotifyDefaultVolume}`, (error, stdout, stderr) => {
+                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${spotifyDefaultVolume} 2`, (error, stdout, stderr) => {
                         if (!error && !stderr) {
                             log.info(`[CS::GO] Let's turn up the volume to ${spotifyDefaultVolume}%`);
                             isLowVolume = false;
@@ -86,10 +86,13 @@ function generalProcessData(data) {
                 }
             } else if (config.application.operationMode === 2) {
                 if(!isLowVolume) {
-                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${config.application.spotifyLowVolume}`, (error, stdout, stderr) => {
+                    exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${config.application.spotifyLowVolume} 1`, (error, stdout, stderr) => {
                         if (!error && !stderr) {
                             log.info(`[CS::GO] Lower the volume to ${config.application.spotifyLowVolume}%`);
                             isLowVolume = true;
+
+                            spotifyDefaultVolume = stdout.match(new RegExp("userVolume:" + "(.*)" + ";"))[1];
+                            log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
                         }
                     });
                 }
@@ -129,7 +132,7 @@ spotifyHelper.player.on('ready', () => {
             exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId}`, (error, stdout, stderr) => {
                 if (!error && !stderr) {
                     spotifyAppId = stdout.match(new RegExp("appid:" + "(.*)" + ";"))[1];
-                    spotifyDefaultVolume = stdout.match(new RegExp("volume:" + "(.*)" + ";"))[1];
+                    spotifyDefaultVolume = stdout.match(new RegExp("userVolume:" + "(.*)" + ";"))[1];
 
                     log.trace(`[SPOTIFY] spotifyAppId: ${spotifyAppId}`);
                     log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
