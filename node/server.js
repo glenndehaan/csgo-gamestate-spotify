@@ -64,10 +64,11 @@ function generalProcessData(data) {
                 }
             } else if (config.application.operationMode === 2) {
                 if(isLowVolume) {
+                    isLowVolume = false;
+                    log.trace("[CS::GO] Started turning up volume");
                     exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${spotifyDefaultVolume} 2`, (error, stdout, stderr) => {
                         if (!error && !stderr) {
                             log.info(`[CS::GO] Let's turn up the volume to ${spotifyDefaultVolume}%`);
-                            isLowVolume = false;
                         }
                     });
                 }
@@ -86,10 +87,11 @@ function generalProcessData(data) {
                 }
             } else if (config.application.operationMode === 2) {
                 if(!isLowVolume) {
+                    log.trace("[CS::GO] Started lowering volume");
+                    isLowVolume = true;
                     exec(`"${__dirname}\\..\\exec\\SpotifySound.exe" ${spotifyAppId} ${config.application.spotifyLowVolume} 1`, (error, stdout, stderr) => {
                         if (!error && !stderr) {
                             log.info(`[CS::GO] Lower the volume to ${config.application.spotifyLowVolume}%`);
-                            isLowVolume = true;
 
                             spotifyDefaultVolume = stdout.match(new RegExp("userVolume:" + "(.*)" + ";"))[1];
                             log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
