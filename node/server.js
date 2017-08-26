@@ -93,8 +93,9 @@ function generalProcessData(data) {
                         if (!error && !stderr) {
                             log.info(`[CS::GO] Lower the volume to ${config.application.spotifyLowVolume}%`);
 
-                            spotifyDefaultVolume = stdout.match(new RegExp("userVolume:" + "(.*)" + ";"))[1];
-                            log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
+                            //todo fix
+                            // spotifyDefaultVolume = stdout.match(new RegExp("userVolume:" + "(.*)" + ";"))[1];
+                            // log.trace(`[SPOTIFY] spotifyDefaultVolume: ${spotifyDefaultVolume}`);
                         }
                     });
                 }
