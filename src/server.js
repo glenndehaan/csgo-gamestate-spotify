@@ -1,7 +1,7 @@
 const http = require('http');
 const exec = require('child_process').exec;
 const SpotifyWebHelper = require('spotify-web-helper');
-const loudness = require('loudness');
+const audio = require('win-audio').speaker;
 const config = require('./config');
 
 /**
@@ -69,32 +69,15 @@ function generalProcessData(data) {
                     isPlaying = true;
                 }
             } else if (config.application.operationMode === 2) {
-                global.log.trace("[CS::GO] Started getting system volume");
-
-                loudness.getVolume((err, vol) => {
-                    if(err) {
-                        global.log.error(`[LOUDNESS] Error: ${err}`);
-                        return;
-                    }
-
-                    systemDefaultVolume = vol;
-
-                    loudness.setVolume(0, (err) => {
-                        if(err) {
-                            global.log.error(`[LOUDNESS] Error: ${err}`);
-                            return;
-                        }
-
-                        global.log.info(`[CS::GO] Let's start some music`);
-                        spotifyHelper.player.play();
-                        isPlaying = true;
-
-                        global.log.info(`[CS::GO] Let's turn up the volume to ${systemDefaultVolume}%`);
-                        for(let i = 0; i < systemDefaultVolume; i++) {
-                            loudness.setVolume(i);
-                        }
-                    });
-                });
+				if (!isPlaying) {
+					global.log.trace("[CS::GO] Started getting system volume");
+					
+					systemDefaultVolume = audio.get();
+					audio.set(0);
+					
+					global.log.info(`[CS::GO] Let's start some music`);
+					spotifyHelper.player.play();
+				}
             }
         } else {
             global.log.warn(`[SPOTIFY] Isn't ready to handle requests`);
@@ -151,6 +134,15 @@ spotifyHelper.player.on('ready', () => {
  */
 spotifyHelper.player.on('play', () => {
     global.log.info(`[SPOTIFY] Is now playing music`);
+	
+	if (!isPlaying) {
+		isPlaying = true;
+
+		global.log.info(`[CS::GO] Let's turn up the volume to ${systemDefaultVolume}%`);
+		for(let i = 0; i <= systemDefaultVolume; i++) {
+			audio.set(i);
+		}
+	}
 });
 
 /**

@@ -9,7 +9,8 @@
   },
   "pkg": {
     "assets": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "node_modules/win-audio"
     ]
   },
   "bin": "src/bundle.js",
@@ -31,6 +32,7 @@
     "nodemon": "^1.17.5",
     "pkg": "^4.3.3",
     "simple-node-logger": "^0.93.37",
-    "spotify-web-helper": "^1.14.0"
+    "spotify-web-helper": "^1.14.0",
+    "win-audio": "^1.2.0"
   }
 }

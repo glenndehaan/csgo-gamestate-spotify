@@ -1,1 +1,1 @@
-{"application": {"logLevel": "info", "port": 3001, "host": "127.0.0.1", "operationMode": 1, "spotifyLowVolume": 15}}
+{"application": {"logLevel": "info", "port": 3001, "host": "127.0.0.1", "operationMode": 2, "spotifyLowVolume": 15}}
