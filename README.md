@@ -13,6 +13,7 @@ After you died in CS we start playing music from spotify until you need to play.
 - Download the `csgo-gamestate-spotify-win.exe` file from GitHub in the build folder
 - Download the `gamestate_integration_glennserver_spotify.cfg` file from GitHub in the cfg folder
 - Copy the `gamestate_integration_glennserver_spotify.cfg` file to your `C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg` folder
+- Open up Spotify
 - Open the `csgo-gamestate-spotify-win.exe` file
 
 Then open up CS::GO and start playing after you died we will play your music from Spotify.
