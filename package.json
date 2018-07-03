@@ -9,8 +9,7 @@
   },
   "pkg": {
     "assets": [
-      "src/**/*.js",
-      "node_modules/win-audio"
+      "src/**/*.js"
     ]
   },
   "bin": "src/bundle.js",

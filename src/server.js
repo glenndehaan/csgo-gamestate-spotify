@@ -1,7 +1,8 @@
 const http = require('http');
 const exec = require('child_process').exec;
 const SpotifyWebHelper = require('spotify-web-helper');
-const audio = require('win-audio').speaker;
+//TODO FIX this in PKG
+//const audio = require('win-audio').speaker;
 const config = require('./config');
 
 /**
@@ -30,6 +31,11 @@ const spotifyHelper = SpotifyWebHelper();
 let spotifyReady = false;
 let isPlaying = false;
 let systemDefaultVolume = 0;
+
+/**
+ * Override config
+ */
+config.operationMode = 1;
 
 /**
  * Create new HTTP server
