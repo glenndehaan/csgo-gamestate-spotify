@@ -9,12 +9,21 @@ After you died in CS we start playing music from spotify until you need to play.
 - Spotify Web Helper
 - Simple Node Logger
 
-## Usage
+## Normal Usage
+- Download the `csgo-gamestate-spotify-win.exe` file from GitHub in the build folder
+- Download the `gamestate_integration_glennserver_spotify.cfg` file from GitHub in the cfg folder
+- Copy the `gamestate_integration_glennserver_spotify.cfg` file to your `C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg` folder
+- Open the `csgo-gamestate-spotify-win.exe` file
+
+Then open up CS::GO and start playing after you died we will play your music from Spotify.
+
+## Development Usage
+- Download the project from GitHub
 - Install NodeJS 8.0 or higher
-- Copy the `gamestate_integration_glennserver_spotify.cfg` file to your `Steam\SteamApps\common\Counter-Strike Global Offensive\csgo\cfg` folder
+- Copy the `gamestate_integration_glennserver_spotify.cfg` file to your `C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive\csgo\cfg` folder
 - Open up Spotify
-- Run `npm install` in the node folder
-- Run `npm run server` in the node folder
+- Run `npm install` in the root project folder
+- Run `npm start` in the root project folder
 
 Then open up CS::GO and start playing after you died we will play your music from Spotify.
 
@@ -22,10 +31,8 @@ Then open up CS::GO and start playing after you died we will play your music fro
 All logs will be written to the `csgo-gamestate-spotify.log` file in the node folder.
 
 ## TODO
-- C# return old sound level from user so that if user changes max volume we can also maintain that new volume level
-- Operation mode 2 implement fadein / fadeout
-- Create installer for windows to create start shortcuts
-- Better manual?
+- Create GUI (@ChrisEKN)
+- Fix Operation mode 2
 
 ## License
 
