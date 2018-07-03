@@ -11,3 +11,6 @@ npm-debug.log
 
 # Logs
 csgo-gamestate-spotify.log
+
+# Config
+build/config.json

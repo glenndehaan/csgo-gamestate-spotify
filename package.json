@@ -1,0 +1,36 @@
+{
+  "name": "csgo-gamestate-spotify",
+  "version": "0.0.0",
+  "description": "NPM packages for csgo-gamestate-spotify",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon -L --watch ./src ./src/server.js",
+    "build": "pkg ./package.json --targets latest-win-x64,latest-macos-x64 --out-path ./build"
+  },
+  "pkg": {
+    "assets": [
+      "src/**/*.js"
+    ]
+  },
+  "bin": "src/bundle.js",
+  "author": {
+    "name": "Glenn de Haan",
+    "email": "glenn@dehaan.cloud",
+    "url": "https://glenndehaan.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/glenndehaan/csgo-gamestate-spotify.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "loudness": "^0.2.2",
+    "nodemon": "^1.17.5",
+    "pkg": "^4.3.3",
+    "simple-node-logger": "^0.93.37",
+    "spotify-web-helper": "^1.14.0"
+  }
+}
