@@ -2,17 +2,18 @@
   "name": "csgo-gamestate-spotify",
   "version": "0.0.0",
   "description": "NPM packages for csgo-gamestate-spotify",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "nodemon -L --watch ./src ./src/server.js",
-    "build": "pkg ./package.json --targets latest-win-x64,latest-macos-x64 --out-path ./build"
+    "start": "electron .",
+    "predev": "rimraf ./src/dist",
+    "dev": "concurrently 'electromon .' 'npm run webpack'",
+    "webpack": "webpack --watch --watch-poll --mode development --config ./_scripts/webpack.config.js",
+    "webpack:production": "webpack --mode production --config ./_scripts/webpack.config.js",
+    "prebuild": "rimraf ./src/dist",
+    "build": "npm run webpack:production && npm run build:macos && npm run build:win",
+    "build:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=build",
+    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'"
   },
-  "pkg": {
-    "assets": [
-      "src/**/*.js"
-    ]
-  },
-  "bin": "src/bundle.js",
   "author": {
     "name": "Glenn de Haan",
     "email": "glenn@dehaan.cloud",
@@ -27,11 +28,22 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "loudness": "^0.2.2",
-    "nodemon": "^1.17.5",
-    "pkg": "^4.3.3",
-    "simple-node-logger": "^0.93.37",
-    "spotify-web-helper": "^1.14.0",
-    "win-audio": "^1.2.0"
+    "electron-debug": "^2.0.0",
+    "preact": "^8.2.9",
+    "spotify-web-helper": "^1.14.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.6.0",
+    "electromon": "^1.0.10",
+    "electron": "^2.0.0",
+    "electron-packager": "^12.1.0",
+    "electron-packager-dummy-wine": "^1.0.2",
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
   }
 }

@@ -1,8 +1,5 @@
 const http = require('http');
-const exec = require('child_process').exec;
 const SpotifyWebHelper = require('spotify-web-helper');
-//TODO FIX this in PKG
-//const audio = require('win-audio').speaker;
 const config = require('./config');
 
 /**
@@ -140,15 +137,6 @@ spotifyHelper.player.on('ready', () => {
  */
 spotifyHelper.player.on('play', () => {
     global.log.info(`[SPOTIFY] Is now playing music`);
-	
-	if (!isPlaying) {
-		isPlaying = true;
-
-		global.log.info(`[CS::GO] Let's turn up the volume to ${systemDefaultVolume}%`);
-		for(let i = 0; i <= systemDefaultVolume; i++) {
-			audio.set(i);
-		}
-	}
 });
 
 /**
