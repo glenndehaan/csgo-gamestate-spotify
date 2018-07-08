@@ -17,6 +17,9 @@ const createWindow = () => {
     // Create the browser window.
     mainWindow = new BrowserWindow({width: 800, height: 600});
 
+    // Remove default menu
+    mainWindow.setMenu(null);
+
     // and load the index.html of the app.
     mainWindow.loadFile(path.resolve(`${__dirname}/templates/index.html`));
 

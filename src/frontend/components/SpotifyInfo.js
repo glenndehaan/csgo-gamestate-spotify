@@ -50,17 +50,15 @@ export default class SpotifyInfo extends Component {
      * @returns {*}
      */
     render() {
-        if(this.state.isPlaying) {
-            return (
-                <div>
-                    <img src="../images/spotify-logo.png" />
+        return (
+            <div id="spotify-info" className={this.state.isPlaying ? 'is-playing' : ''}>
+                <img src="../images/spotify-logo.png"/>
+                <div id="info">
                     <h2>{this.state.title}</h2>
                     <h3>{this.state.artist}</h3>
-                    <SpotifyControls/>
                 </div>
-            );
-        } else {
-            return null;
-        }
+                <SpotifyControls/>
+            </div>
+        );
     }
 }

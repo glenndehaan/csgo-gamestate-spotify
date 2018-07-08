@@ -130,7 +130,7 @@ export default class CSGO extends Component {
      */
     render() {
         return (
-            <div>
+            <div id="csgo">
                 <img src="../images/csgo-logo.png" />
                 <h3>{this.state.matchRunning ? 'Match running' : 'Waiting for match to start'}</h3>
                 {this.state.matchRunning &&
