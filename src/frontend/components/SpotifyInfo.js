@@ -1,20 +1,21 @@
 import {h, Component} from 'preact';
+import SpotifyControls from './SpotifyControls';
 
 export default class SpotifyInfo extends Component {
     constructor() {
         super();
 
         this.state = {
+            isPlaying: false,
             title: "",
             artist: ""
         };
     }
 
     /**
-     *
+     * Function that runs when the component gets mounted
      */
     componentDidMount() {
-        console.log('here1');
         window.spotifyHelper.player.on('ready', () => {
             window.spotifyHelper.player.on('track-will-change', track => {
                 this.setState({
@@ -23,20 +24,43 @@ export default class SpotifyInfo extends Component {
                 });
             });
 
+            window.spotifyHelper.player.on('play', () => {
+                this.setState({
+                    isPlaying: true
+                });
+            });
+
+            window.spotifyHelper.player.on('pause', () => {
+                this.setState({
+                    isPlaying: false
+                });
+            });
+
             this.setState({
+                isPlaying: window.spotifyHelper.status.playing,
                 title: window.spotifyHelper.status.track.track_resource.name,
                 artist: window.spotifyHelper.status.track.artist_resource.name
             });
-            console.log('window.spotifyHelper.status', window.spotifyHelper.status);
         });
     }
 
+    /**
+     * Preact render function
+     *
+     * @returns {*}
+     */
     render() {
-        return (
-            <div>
-                <h1>{this.state.title}</h1>
-                <h2>{this.state.artist}</h2>
-            </div>
-        );
+        if(this.state.isPlaying) {
+            return (
+                <div>
+                    <img src="../images/spotify-logo.png" />
+                    <h2>{this.state.title}</h2>
+                    <h3>{this.state.artist}</h3>
+                    <SpotifyControls/>
+                </div>
+            );
+        } else {
+            return null;
+        }
     }
 }

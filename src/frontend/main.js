@@ -1,6 +1,5 @@
 import {h, Component, render} from 'preact';
 import SpotifyInfo from './components/SpotifyInfo';
-import SpotifyControls from './components/SpotifyControls';
 import CSGO from './components/CSGO';
 
 class App extends Component {
@@ -9,22 +8,15 @@ class App extends Component {
     }
 
     /**
+     * Preact render function
      *
+     * @returns {*}
      */
-    componentDidMount() {
-        console.log('here1');
-    }
-
     render() {
         return (
-            <div>
-                <h1>Hello World!</h1>
-                We are using Node.js {window.process.versions.node},<br/>
-                Chromium {window.process.versions.chrome},<br/>
-                and Electron {window.process.versions.electron}.<br/>
-                <SpotifyInfo/>
-                <SpotifyControls/>
+            <div id="root">
                 <CSGO/>
+                <SpotifyInfo/>
             </div>
         );
     }

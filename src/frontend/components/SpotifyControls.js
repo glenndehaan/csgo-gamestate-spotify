@@ -10,7 +10,7 @@ export default class SpotifyControls extends Component {
     }
 
     /**
-     *
+     * Function that runs when the component gets mounted
      */
     componentDidMount() {
         window.spotifyHelper.player.on('ready', () => {
@@ -32,6 +32,11 @@ export default class SpotifyControls extends Component {
         });
     }
 
+    /**
+     * Preact render function
+     *
+     * @returns {*}
+     */
     render() {
         return (
             <div>

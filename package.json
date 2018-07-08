@@ -7,6 +7,7 @@
     "start": "electron .",
     "predev": "rimraf ./src/dist",
     "dev": "concurrently 'electromon .' 'npm run webpack'",
+    "electron": "electromon .",
     "webpack": "webpack --watch --watch-poll --mode development --config ./_scripts/webpack.config.js",
     "webpack:production": "webpack --mode production --config ./_scripts/webpack.config.js",
     "prebuild": "rimraf ./src/dist",
