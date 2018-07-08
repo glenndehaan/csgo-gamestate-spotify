@@ -12,7 +12,8 @@
     "prebuild": "rimraf ./src/dist",
     "build": "npm run webpack:production && npm run build:macos && npm run build:win",
     "build:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=build",
-    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'"
+    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'",
+    "lint": "eslint -c ./package.json ./"
   },
   "author": {
     "name": "Glenn de Haan",
@@ -27,6 +28,42 @@
   "engines": {
     "node": ">=8.0.0"
   },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true
+      }
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
+      "indent": [
+        "error",
+        4
+      ]
+    },
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ],
+    "settings": {
+      "react": {
+        "pragma": "h"
+      }
+    }
+  },
+  "eslintIgnore": [
+    "src/dist"
+  ],
   "dependencies": {
     "electron-debug": "^2.0.0",
     "preact": "^8.2.9",
@@ -44,6 +81,8 @@
     "electron": "^2.0.0",
     "electron-packager": "^12.1.0",
     "electron-packager-dummy-wine": "^1.0.2",
+    "eslint": "^5.0.1",
+    "eslint-plugin-react": "^7.10.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.1",
     "sass-loader": "^7.0.3",

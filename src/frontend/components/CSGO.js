@@ -1,6 +1,6 @@
 import {h, Component} from 'preact';
 
-export default class extends Component {
+export default class CSGO extends Component {
     constructor() {
         super();
 

@@ -12,7 +12,7 @@ const dev = process.env.NODE_ENV !== 'production';
  */
 global.log = require('simple-node-logger').createSimpleLogger({
     logFilePath: `${dev ? __dirname : process.cwd()}/csgo-gamestate-spotify.log`,
-    timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS',
+    timestampFormat: 'YYYY-MM-DD HH:mm:ss.SSS'
 });
 global.log.setLevel(config.application.logLevel);
 
@@ -27,7 +27,6 @@ const spotifyHelper = SpotifyWebHelper();
  */
 let spotifyReady = false;
 let isPlaying = false;
-let systemDefaultVolume = 0;
 
 /**
  * Override config
@@ -72,15 +71,12 @@ function generalProcessData(data) {
                     isPlaying = true;
                 }
             } else if (config.application.operationMode === 2) {
-				if (!isPlaying) {
-					global.log.trace("[CS::GO] Started getting system volume");
-					
-					systemDefaultVolume = audio.get();
-					audio.set(0);
-					
-					global.log.info(`[CS::GO] Let's start some music`);
-					spotifyHelper.player.play();
-				}
+                if (!isPlaying) {
+                    global.log.trace("[CS::GO] Started getting system volume");
+
+                    global.log.info(`[CS::GO] Let's start some music`);
+                    spotifyHelper.player.play();
+                }
             }
         } else {
             global.log.warn(`[SPOTIFY] Isn't ready to handle requests`);

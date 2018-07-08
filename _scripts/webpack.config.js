@@ -10,7 +10,7 @@ module.exports = {
         main: [
             path.join(buildDirectory, 'main.js'),
             path.join(buildDirectory, 'scss/style.scss')
-        ],
+        ]
     },
     output: {
         path: distDirectory,
