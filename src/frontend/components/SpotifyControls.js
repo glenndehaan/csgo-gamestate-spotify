@@ -46,3 +46,16 @@ export default class SpotifyControls extends Component {
         );
     }
 }
+
+/*
+.btn {
+    border: 1px solid white;
+    background-color: transparent;
+    transform: scale(1);
+    transition: transform 0.15s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+* */

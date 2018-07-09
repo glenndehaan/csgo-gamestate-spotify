@@ -1,30 +1,33 @@
-#spotify-info {
-  border-radius: 25px;
-  background-color:rgba(192, 192, 192, 0.3);
-
+.block {
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 20px;
+
+  display: flex;
+  align-items: center;
 
   width: 90%;
   height: auto;
 
-  margin-top: 20px;
-  margin-bottom: 20px;
-  margin-left: 1000px;
-  transition: margin-left 1s ease;
+  border-radius: 25px;
+  background-color:rgba(192, 192, 192, 0.3);
 
-  vertical-align: middle;
+  transform: translateX(200%);
+  transition: transform 1s ease;
 
   &.is-playing {
-    transition: margin-left 1s ease;
-    margin-left: 0;
+    transition: transform 1s ease;
+    transform: translateX(0);
   }
 
-  &.info {
-    position: absolute;
+  .info {
+    padding-right: 15px;
   }
 
   img {
+    display: block;
     width: 150px;
-    float: left;
+    height: 150px;
+    margin-right: 15px;
   }
 }
