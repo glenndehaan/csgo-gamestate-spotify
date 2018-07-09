@@ -61,14 +61,14 @@ export default class CSGO extends Component {
                 matchRunning: true,
                 map: data.map.name,
                 gameMode: data.map.mode,
-                round: data.map.round
+                round: (data.map.round + 1)
             });
         }
 
         /**
          * Update Basic Match Data
          */
-        if(data.player && data.player.activity === 'menu' && typeof data.map === "undefined") {
+        if (data.player && data.player.activity === 'menu' && typeof data.map === "undefined") {
             this.backgroundUpdate('', true);
 
             this.setState({
@@ -81,7 +81,7 @@ export default class CSGO extends Component {
 
         if (typeof data.round !== "undefined") {
             this.setState({
-                round: data.map.round
+                round: (data.map.round + 1)
             });
         }
     }
@@ -134,7 +134,7 @@ export default class CSGO extends Component {
      * @param reset
      */
     backgroundUpdate(map = '', reset = false) {
-        if(reset) {
+        if (reset) {
             document.body.style.backgroundImage = `url('../images/background.jpg')`;
             return;
         }
@@ -150,16 +150,18 @@ export default class CSGO extends Component {
     render() {
         return (
             <div id="csgo" className="block">
-                <img src="../images/csgo-logo.png" />
-                <h3>{this.state.matchRunning ? 'Match running' : 'Waiting for match to start'}</h3>
-                {this.state.matchRunning &&
-                    <p>
-                        Map: {this.state.map}<br/>
-                        Round: {this.state.round}<br/>
-                        Game Mode: {this.state.gameMode}<br/>
-                        Round Live: {this.state.roundRunning ? 'Yes' : 'No, Time for a break'}
-                    </p>
-                }
+                <img src="../images/csgo-logo.png"/>
+                <div>
+                    <h3>{this.state.matchRunning ? 'Match running' : 'Waiting for match to start'}</h3>
+                    {this.state.matchRunning &&
+                        <span>
+                            Map: {this.state.map}<br/>
+                            Round: {this.state.round}<br/>
+                            Game Mode: {this.state.gameMode}<br/>
+                            Round Live: {this.state.roundRunning ? 'Yes' : 'No, Time for a break'}
+                        </span>
+                    }
+                </div>
             </div>
         );
     }
