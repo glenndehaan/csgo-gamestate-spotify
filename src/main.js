@@ -15,10 +15,13 @@ let mainWindow;
 
 const createWindow = () => {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600});
+    mainWindow = new BrowserWindow({width: 800, height: 600, resizable: false});
 
     // Remove default menu
     mainWindow.setMenu(null);
+
+    // Disable maximize button
+    mainWindow.setMaximizable(false);
 
     // and load the index.html of the app.
     mainWindow.loadFile(path.resolve(`${__dirname}/templates/index.html`));

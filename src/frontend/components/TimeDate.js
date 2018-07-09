@@ -80,9 +80,12 @@ export default class TimeDate extends Component {
      */
     render() {
         return (
-            <div id="time-date">
-                <h2>{this.state.date}</h2>
-                <h3>{this.state.time}</h3>
+            <div id="time-date" className="block">
+                <img src="../images/clock-logo.png" />
+                <div>
+                    <h2>{this.state.date}</h2>
+                    <h3>{this.state.time}</h3>
+                </div>
             </div>
         );
     }

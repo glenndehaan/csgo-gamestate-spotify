@@ -1,0 +1,43 @@
+.block {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+
+  width: 90%;
+  height: auto;
+
+  border-radius: 25px;
+  background-color:rgba(192, 192, 192, 0.7);
+
+  transform: translateX(0);
+  opacity: 1;
+  transition: transform 1s ease, opacity 2s ease;
+
+  &.is-paused {
+    transition: transform 2s ease, opacity 1.5s ease;
+    opacity: 0;
+    transform: translateX(200%);
+  }
+
+  &#time-date {
+    height: 110px;
+  }
+
+  &#csgo {
+    height: 250px;
+  }
+
+  .info {
+    padding-right: 15px;
+  }
+
+  img {
+    display: block;
+    width: 75px;
+    height: 75px;
+    margin-right: 15px;
+  }
+}

@@ -55,6 +55,8 @@ export default class CSGO extends Component {
          * Update Basic Match Data
          */
         if (typeof data.map !== "undefined") {
+            this.backgroundUpdate(data.map.name);
+
             this.setState({
                 matchRunning: true,
                 map: data.map.name,
@@ -67,6 +69,8 @@ export default class CSGO extends Component {
          * Update Basic Match Data
          */
         if(data.player && data.player.activity === 'menu' && typeof data.map === "undefined") {
+            this.backgroundUpdate('', true);
+
             this.setState({
                 matchRunning: false,
                 map: false,
@@ -124,13 +128,28 @@ export default class CSGO extends Component {
     }
 
     /**
+     * Updates the background image to the current played map
+     *
+     * @param map
+     * @param reset
+     */
+    backgroundUpdate(map = '', reset = false) {
+        if(reset) {
+            document.body.style.backgroundImage = `url('../images/background.jpg')`;
+            return;
+        }
+
+        document.body.style.backgroundImage = `url('../images/maps/${map}.jpg')`;
+    }
+
+    /**
      * Preact render function
      *
      * @returns {*}
      */
     render() {
         return (
-            <div className="block is-playing">
+            <div id="csgo" className="block">
                 <img src="../images/csgo-logo.png" />
                 <h3>{this.state.matchRunning ? 'Match running' : 'Waiting for match to start'}</h3>
                 {this.state.matchRunning &&
