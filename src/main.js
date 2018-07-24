@@ -15,7 +15,12 @@ let mainWindow;
 
 const createWindow = () => {
     // Create the browser window.
-    mainWindow = new BrowserWindow({width: 800, height: 600, resizable: false});
+    mainWindow = new BrowserWindow({
+        width: 800,
+        height: 600,
+        resizable: false,
+        icon: path.resolve(`${__dirname}/images/icons/png/64x64.png`)
+    });
 
     // Remove default menu
     mainWindow.setMenu(null);

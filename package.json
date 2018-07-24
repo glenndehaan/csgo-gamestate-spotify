@@ -8,14 +8,14 @@
     "predev": "rimraf ./src/dist",
     "dev": "concurrently 'electromon .' 'npm run webpack'",
     "electron": "electromon .",
+    "electron:rebuild": "electron-rebuild",
     "webpack": "webpack --watch --watch-poll --mode development --config ./_scripts/webpack.config.js",
     "webpack:production": "webpack --mode production --config ./_scripts/webpack.config.js",
-    "prebuild": "rimraf ./src/dist",
-    "build": "npm run webpack:production && npm run build:macos && npm run build:win",
-    "build:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=build",
-    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'",
-    "lint": "eslint -c ./package.json ./",
-    "rebuild": "npm rebuild --runtime=electron --target=2.0.5 --disturl=https://atom.io/download/atom-shell --abi=64"
+    "prebuild:macos": "rimraf ./src/dist && npm run electron:rebuild && npm run webpack:production",
+    "prebuild:win": "rimraf ./src/dist && npm run electron:rebuild && npm run webpack:production",
+    "build:macos": "electron-packager . 'CSGO GameState Spotify' --overwrite --platform=darwin --arch=x64 --prune=true --out=build --icon './src/images/icons/mac/icon.icns'",
+    "build:win": "electron-packager . 'CSGO GameState Spotify' --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'",
+    "lint": "eslint -c ./package.json ./"
   },
   "author": {
     "name": "Glenn de Haan",
@@ -69,8 +69,7 @@
   "dependencies": {
     "electron-debug": "^2.0.0",
     "preact": "^8.2.9",
-    "robotjs": "^0.5.1",
-    "spotify-web-helper": "^1.14.0"
+    "robotjs": "^0.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -84,6 +83,7 @@
     "electron": "^2.0.0",
     "electron-packager": "^12.1.0",
     "electron-packager-dummy-wine": "^1.0.2",
+    "electron-rebuild": "^1.8.1",
     "eslint": "^5.0.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-react": "^7.10.0",
