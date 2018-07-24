@@ -14,8 +14,7 @@
     "prebuild:macos": "rimraf ./src/dist && npm run electron:rebuild && npm run webpack:production",
     "prebuild:win": "rimraf ./src/dist && npm run electron:rebuild && npm run webpack:production",
     "build:macos": "electron-packager . 'CSGO GameState Spotify' --overwrite --platform=darwin --arch=x64 --prune=true --out=build --icon './src/images/icons/mac/icon.icns'",
-    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --asar=true --version-string.CompanyName=CE --version-string.FileDescription=CE --icon=./src/images/icons/win/icon.ico --version-string.ProductName='CSGO GameState Spotify'",
-    "build:win:1": "electron-builder",
+    "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --icon=./src/images/icons/win/icon.ico --version-string.ProductName='CSGO GameState Spotify'",
     "lint": "eslint -c ./package.json ./"
   },
   "author": {
@@ -30,18 +29,6 @@
   "license": "MIT",
   "engines": {
     "node": ">=8.0.0"
-  },
-  "build": {
-    "productName": "CSGO GameState Spotify",
-    "win": {
-      "target": ["portable"]
-    },
-    "portable": {
-      "artifactName": "csgo_gamestate_spotify.exe"
-    },
-    "directories": {
-      "output": "build"
-    }
   },
   "eslintConfig": {
     "parserOptions": {
@@ -94,7 +81,6 @@
     "css-loader": "^0.28.11",
     "electromon": "^1.0.10",
     "electron": "^2.0.0",
-    "electron-builder": "^20.25.0",
     "electron-packager": "^12.1.0",
     "electron-packager-dummy-wine": "^1.0.2",
     "electron-rebuild": "^1.8.1",
