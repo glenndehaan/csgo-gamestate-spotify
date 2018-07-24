@@ -1,6 +1,5 @@
 import {h, Component, render} from 'preact';
 import TimeDate from './components/TimeDate';
-import SpotifyInfo from './components/SpotifyInfo';
 import CSGO from './components/CSGO';
 
 class App extends Component {
@@ -18,7 +17,6 @@ class App extends Component {
             <div id="root">
                 <TimeDate/>
                 <CSGO/>
-                <SpotifyInfo/>
             </div>
         );
     }

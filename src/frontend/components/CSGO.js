@@ -13,7 +13,6 @@ export default class CSGO extends Component {
         };
 
         this.server = false;
-        this.spotifyReady = false;
         this.isPlaying = false;
     }
 
@@ -39,10 +38,6 @@ export default class CSGO extends Component {
         });
 
         this.server.listen("3001", "0.0.0.0");
-
-        window.spotifyHelper.player.on('ready', () => {
-            this.spotifyReady = true;
-        });
     }
 
     /**
@@ -96,33 +91,25 @@ export default class CSGO extends Component {
 
         if ((data.player && data.player.activity === 'menu') || (data.player.state.health === 0 || data.player.steamid !== data.provider.steamid) || (data.round && data.round.phase !== "live")) {
             // Let's play some music
-            if (this.spotifyReady) {
-                if (!this.isPlaying) {
-                    console.log(`[CS::GO] Let's start some music`);
-                    window.spotifyHelper.player.play();
-                    this.isPlaying = true;
+            if (!this.isPlaying) {
+                console.log(`[CS::GO] Let's start some music`);
+                window.robotJS.keyTap("audio_play");
+                this.isPlaying = true;
 
-                    this.setState({
-                        roundRunning: false
-                    });
-                }
-            } else {
-                console.warn(`[SPOTIFY] Isn't ready to handle requests`);
+                this.setState({
+                    roundRunning: false
+                });
             }
         } else {
             // Let's be serious so quit the music
-            if (this.spotifyReady) {
-                if (this.isPlaying) {
-                    console.log(`[CS::GO] Stop the music`);
-                    window.spotifyHelper.player.pause();
-                    this.isPlaying = false;
+            if (this.isPlaying) {
+                console.log(`[CS::GO] Stop the music`);
+                window.robotJS.keyTap("audio_pause");
+                this.isPlaying = false;
 
-                    this.setState({
-                        roundRunning: true
-                    });
-                }
-            } else {
-                console.warn(`[SPOTIFY] Isn't ready to handle requests`);
+                this.setState({
+                    roundRunning: true
+                });
             }
         }
     }

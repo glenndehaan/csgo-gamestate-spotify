@@ -14,7 +14,8 @@
     "build": "npm run webpack:production && npm run build:macos && npm run build:win",
     "build:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=build",
     "build:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=build --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName='CSGO GameState Spotify'",
-    "lint": "eslint -c ./package.json ./"
+    "lint": "eslint -c ./package.json ./",
+    "rebuild": "npm rebuild --runtime=electron --target=2.0.5 --disturl=https://atom.io/download/atom-shell --abi=64"
   },
   "author": {
     "name": "Glenn de Haan",
@@ -68,6 +69,7 @@
   "dependencies": {
     "electron-debug": "^2.0.0",
     "preact": "^8.2.9",
+    "robotjs": "^0.5.1",
     "spotify-web-helper": "^1.14.0"
   },
   "devDependencies": {
